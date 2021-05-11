@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  get 'response/index'
   resources :tickets
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
-  root 'tickets#index'
+  # to DRY up code so controllers don't have to specify the path it's on
+  # just call requests.path
+  root to: redirect('/tickets')
 end
