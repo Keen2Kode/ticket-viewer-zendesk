@@ -1,11 +1,11 @@
 module ApplicationHelper
 
-    def json_data(route)
+    # eg: usage of search params
+    # json_data page: 3, per_page: 25
+    def json_data(**search_params)
         
-        resp = api_response(route)
+        resp = api_response(search_params)
         wrapped_data = JSON.parse resp.body
-        # remove wrapper key "ticket(s): "
-        wrapped_data.map{ |k,v| v}.first
     end
     
     
@@ -15,10 +15,9 @@ module ApplicationHelper
     
     # using the http gem, we can simplify the basic auth process 
     # https://developer.zendesk.com/rest_api/docs/support/introduction#using-basic-authentication
-    def api_response(route)
-        encrypted_name_password = "cmV1YmVuLnJhamVldkBnbWFpbC5jb206dGVzdGluZw=="
-        domain = "slack6386"
-        resp = HTTP.auth("Basic #{encrypted_name_password}").get("https://#{domain}.zendesk.com/api/v2/#{route}.json")
+    def api_response(search_params)
+        header = "Basic cmV1YmVuLnJhamVldkBnbWFpbC5jb206dGVzdGluZw=="
+        resp = HTTP.auth(header).get("https://slack6386.zendesk.com/api/v2/#{request.path}.json", params: search_params)
         
         raise "#{resp.status}" unless resp.status.success?
         resp

@@ -1,4 +1,16 @@
-<h1>Tickets: <%= @tickets.size %> <%= @tickets[0].status %></h1>
+<h1>Tickets displayed: <%= @tickets.size %></h1>
+
+
+<% if @has_prev_page %>
+  <%= link_to 'Prev', tickets_path(page: @page - 1) %> | 
+<% end%>
+
+<% if @has_next_page %>
+  <%= link_to 'Next', tickets_path(page: @page + 1) %> 
+<% end %>
+
+<br>
+<br>
 
 <table>
   <thead>
