@@ -16,8 +16,9 @@ module ApplicationHelper
     # using the http gem, we can simplify the basic auth process 
     # https://developer.zendesk.com/rest_api/docs/support/introduction#using-basic-authentication
     def api_response(search_params)
-        header = "Basic cmV1YmVuLnJhamVldkBnbWFpbC5jb206dGVzdGluZw=="
-        resp = HTTP.auth(header).get("https://slack6386.zendesk.com/api/v2/#{request.path}.json", params: search_params)
+        key = Rails.configuration.api['key']
+        url = Rails.configuration.api['url']
+        resp = HTTP.headers(accept: "application/json").auth(key).get(url + request.path, params: search_params)
         
         raise ActionController::RoutingError, "#{resp.status}" unless resp.status.success?
         resp

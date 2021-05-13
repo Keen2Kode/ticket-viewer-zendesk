@@ -1,0 +1,12 @@
+defaults: &defaults
+  url: 'https://slack6386.zendesk.com/api/v2/'
+  key: 'Basic cmV1YmVuLnJhamVldkBnbWFpbC5jb206dGVzdGluZw=='
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
