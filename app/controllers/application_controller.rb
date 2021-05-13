@@ -1,16 +1,17 @@
 class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
     include ApplicationHelper
-    # # so can be applied to other models eg: Customer, if needed
-    # before_action :set_json_data
+    
+    rescue_from StandardError, with: :program_error_render
+    rescue_from ActionController::RoutingError, with: :api_error_render
+    # so can be applied to other models eg: Customer, if needed
     
     
-    # def set_json_data
-    #     begin
-    #         # using ApplicationHelper to handle requests -> json
-    #         @json_data = json_data
-    #     rescue StandardError => e
-    #         redirect_to response_index_path, notice: e.message
-    #     end
-    # end
+    def api_error_render(error)
+        redirect_to response_path('api_request'), notice: error.message
+    end
+    
+    def program_error_render(error)
+        redirect_to response_path('general'), notice: error.message
+    end
 end

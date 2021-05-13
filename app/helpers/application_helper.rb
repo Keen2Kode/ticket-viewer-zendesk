@@ -5,7 +5,7 @@ module ApplicationHelper
     def json_data(**search_params)
         
         resp = api_response(search_params)
-        wrapped_data = JSON.parse resp.body
+        JSON.parse resp.body
     end
     
     
@@ -19,7 +19,7 @@ module ApplicationHelper
         header = "Basic cmV1YmVuLnJhamVldkBnbWFpbC5jb206dGVzdGluZw=="
         resp = HTTP.auth(header).get("https://slack6386.zendesk.com/api/v2/#{request.path}.json", params: search_params)
         
-        raise "#{resp.status}" unless resp.status.success?
+        raise ActionController::RoutingError, "#{resp.status}" unless resp.status.success?
         resp
     end
 end
