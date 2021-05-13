@@ -3,8 +3,8 @@ class TicketsController < ApplicationController
   
   def index
     @page = params.fetch(:page, 1).to_i
-    data = json_data page: @page, per_page: TICKETS_PER_PAGE
-    @tickets = data['tickets'].map {|data| Ticket.new(data) }.compact
+    data = json_data(page: @page, per_page: TICKETS_PER_PAGE)
+    @tickets = Ticket.array(data['tickets'])
     
     @has_next_page = data['next_page']
     @has_prev_page = data['previous_page']

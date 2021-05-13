@@ -1,13 +1,6 @@
-<h1>Tickets displayed: <%= @tickets.size %></h1>
+<h1>Zendesk Ticket Viewer</h1>
+<h2>Tickets displayed: <%= @tickets.size %></h2>
 
-
-<% if @has_prev_page %>
-  <%= link_to 'Prev', tickets_path(page: @page - 1) %> | 
-<% end%>
-
-<% if @has_next_page %>
-  <%= link_to 'Next', tickets_path(page: @page + 1) %> 
-<% end %>
 
 <br>
 <br>
@@ -16,9 +9,7 @@
   <thead>
     <tr>
       <th>Subject</th>
-      <th>Description</th>
       <th>Created At</th>
-      <th>Requester ID</th>
       <th>Status</th>
       <th colspan="3"></th>
     </tr>
@@ -28,9 +19,7 @@
     <% @tickets.each do |ticket| %>
       <tr>
         <td><%= link_to ticket.subject, ticket_path(ticket.id) %></td>
-        <td><%= ticket.description %></td>
         <td><%= ticket.created_at %></td>
-        <td><%= ticket.requester_id %></td>
         <td><%= ticket.status %></td>
       </tr>
     <% end %>
@@ -38,3 +27,11 @@
 </table>
 
 <br>
+
+<% if @has_prev_page %>
+  <%= link_to 'Prev', tickets_path(page: @page - 1) %> | 
+<% end%>
+
+<% if @has_next_page %>
+  <%= link_to 'Next', tickets_path(page: @page + 1) %> 
+<% end %>

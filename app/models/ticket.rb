@@ -7,9 +7,15 @@ class Ticket
         @id = data['id']
         @subject = data['subject']
         @description = data['description']
-        @created_at  = data['created_at']
+        date = DateTime.parse(data['created_at'])
+        @created_at  = date.to_date
         @requester_id = data['requester_id'] 
         @status = data['status'] 
+    end
+    
+    # separate model logic from controller
+    def self.array(data_array)
+        data_array.map {|data| Ticket.new(data) }.compact
     end
     
 end
