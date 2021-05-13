@@ -1,0 +1,10 @@
+<% if notice %>
+    <h1><%= notice %></h1>
+    <p>The API request failed :( </p>
+<% else %>
+    <h1> Everything seems fine</h1>
+    <p>
+        Unless you refreshed the page. Go back to the
+        <%= link_to "Tickets page", tickets_path %>
+    </p>
+<% end%>

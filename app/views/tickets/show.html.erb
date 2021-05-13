@@ -1,2 +1,15 @@
-<h1>Tickets#show <%= @ticket.subject %></h1>
-<p>Find me in app/views/tickets/show.html.erb</p>
+<p>
+  <h2> <%= @ticket.subject %>:</h2>
+  <%= @ticket.description %>
+</p>
+
+<p>
+  Created at <%= @ticket.created_at %> 
+  with requester ID <%= @ticket.requester_id %>
+</p>
+
+<p>
+  <h2><%= @ticket.status.capitalize %></h2>
+</p>
+
+<%= link_to 'Back', tickets_path %>
