@@ -7,7 +7,8 @@ class Ticket
         @id = data['id']
         @subject = data['subject']
         @description = data['description']
-        @created_at  = data['created_at']
+        date = DateTime.parse(data['created_at'])
+        @created_at  = date.to_date
         @requester_id = data['requester_id'] 
         @status = data['status'] 
     end
