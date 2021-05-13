@@ -1,26 +1,15 @@
 <p>
-  <h2>Subject:</h2>
-  <%= @ticket.subject %>
-</p>
-
-<p>
-  <h2>Description:</h2>
+  <h2> <%= @ticket.subject %>:</h2>
   <%= @ticket.description %>
 </p>
 
 <p>
-  <h2>Created at:</h2>
-  <%= @ticket.created_at %>
+  Created at <%= @ticket.created_at %> 
+  with requester ID <%= @ticket.requester_id %>
 </p>
 
 <p>
-  <h2>Requester ID:</h2>
-  <%= @ticket.requester_id %>
-</p>
-
-<p>
-  <h2>Status:</h2>
-  <%= @ticket.status %>
+  <h2><%= @ticket.status.capitalize %></h2>
 </p>
 
 <%= link_to 'Back', tickets_path %>

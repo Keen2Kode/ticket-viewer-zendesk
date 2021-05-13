@@ -13,4 +13,9 @@ class Ticket
         @status = data['status'] 
     end
     
+    # separate model logic from controller
+    def self.array(data_array)
+        data_array.map {|data| Ticket.new(data) }.compact
+    end
+    
 end
