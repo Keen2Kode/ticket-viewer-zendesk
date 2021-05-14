@@ -1,6 +1,7 @@
+
 module ApplicationHelper
 
-    # eg: usage of search params
+    # example usage of search params
     # json_data page: 3, per_page: 25
     def json_data(**search_params)
         

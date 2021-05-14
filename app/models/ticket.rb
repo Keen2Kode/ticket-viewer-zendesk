@@ -8,7 +8,7 @@ class Ticket
         @subject = data['subject']
         @description = data['description']
         date = DateTime.parse(data['created_at'])
-        @created_at  = date.to_date
+        @created_at  = date.to_date if date
         @requester_id = data['requester_id'] 
         @status = data['status'] 
     end
