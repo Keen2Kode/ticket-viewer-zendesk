@@ -2,7 +2,9 @@
 
 ## Framework used 
 
-Ruby on Rails 5 running on Cloud9 AWS through the Linux/Ubuntu terminal
+Ruby on Rails 5 running on Cloud9 AWS through the Linux/Ubuntu terminal.
+
+Due to the volatility of Rails, I also deployed a [version to Heroku](https://shielded-coast-55327.herokuapp.com/) incase the app fails to run directly.
 
 ## Steps for configuration
 
