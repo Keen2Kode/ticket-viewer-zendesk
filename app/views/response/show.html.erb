@@ -1,6 +1,6 @@
 <% if notice %>
-    <h1><%= notice %></h1>
-    <p>There's been a <%= @response_type%> error :( </p>
+    <h1><%= @response_type.capitalize %> error </h1>
+    <p> <%= notice %> </p>
 <% else %>
     <h1> Everything seems fine</h1>
     <p>

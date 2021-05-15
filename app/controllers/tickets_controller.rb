@@ -3,7 +3,7 @@ class TicketsController < ApplicationController
   
   def index
     @page = params.fetch(:page, 1).to_i
-    data = json_data(page: @page, per_page: TICKETS_PER_PAGE)
+    data = data( page: @page, per_page: TICKETS_PER_PAGE)
     @tickets = Ticket.array(data['tickets'])
     
     @has_next_page = data['next_page']
@@ -11,7 +11,7 @@ class TicketsController < ApplicationController
   end
 
   def show
-    @ticket = Ticket.new(json_data['ticket'])
+    @ticket = Ticket.new(data['ticket'])
   end
   
 end

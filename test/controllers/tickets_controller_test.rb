@@ -3,9 +3,26 @@ require 'test_helper'
 
 class TicketsControllerTest < ActionDispatch::IntegrationTest
   
+  
+  
   def setup
     
+    @json_data = 
+    {
+      'ticket' => 
+      {
+        'id' => 1,
+        'subject' => "Subject name",
+        'description' => "Hello this is a description",
+        'created_at' => "2012-04-04T09:14:57Z",
+        'requester_id' => 1234,
+        'status' => "open"
+      }
+    }
+    
     @data_array = 
+    {
+      'tickets' => 
       [
         {
           'id' => 1,
@@ -24,32 +41,48 @@ class TicketsControllerTest < ActionDispatch::IntegrationTest
           'status' => "open"
         }
       ]
+    }
+    
+    @tickets = Ticket.array(@data_array['tickets'])
+    @ticket = Ticket.new(@json_data['ticket'])
   end
   
-  #haven't figured out how to mock the object HTTP yet, 
-  # so direct calls to the API still occur
+  def mock_json_data(data)
+    Zendesk.stub :json_data, data do
+      yield
+    end
+  end
+  
+  
   test "should get index" do
-    get tickets_url
-    assert_response :success
     
-    # assert_equal "index", @controller.action_name
-    # assert_equal "application/json", @request.media_type
+    mock_json_data @data_array do
+      get tickets_url
+      assert_response :success
+    end
   end
 
   test "should show ticket" do
-    get ticket_url(1)
-    assert_response :success
+    mock_json_data @json_data do
+      get ticket_url @ticket.id
+      assert_response :success
+    end
   end
 
 
-  test "pagination" do
-    get tickets_url(page=3)
-    assert_response :success
+  test "should show page" do
+    mock_json_data @data_array do
+      get tickets_url page = 10
+      assert_equal 10, @controller.params[:format].to_i
+    end
+  end
+
+  test "should show existing ticket" do
+    mock_json_data @json_data do 
+      get ticket_url @ticket.id
+      assert_response :success
+    end
   end
   
-  test "non existing ticket redirects to response#show" do
-    # ideally the tickets would be mocked and an id higher would be passed in
-    get ticket_url(10000)
-    assert_redirected_to response_url(ApplicationController::API)
-  end
+  
 end
