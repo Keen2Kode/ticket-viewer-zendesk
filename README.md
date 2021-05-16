@@ -31,11 +31,15 @@ rails s
 ### Additional Notes
 
 
+
 * Currently, I'm doing the RAD course in RMIT which heavily employs Rails in its teaching material. As the coding challenge and the course are done in tandem, I thought this would be a good opportunity to apply the course knowledge I've acquired over the past 2 weeks onto this challenge. Due to the time constraints, using Rails also seemed like a good choice when going for Rapid Development.
 
 * To reduce configuration issues with a database, I created the app with`--skip-ActiveRecord`so there's no database to create.
 
 * Since there's no database, the models Zendesk and Ticket exist to access and manipulate API data.
+
+> Tells the user something is wrong if there is a program error.
+* Based on this requirement, I added this `rescue_from StandardError, with: :program_error_render` to the ApplicationController class. This means that most errors will be caught and redirected to a custom template. To see the general errors normally, uncomment this line.
 
 
 
