@@ -22,7 +22,8 @@ class Zendesk
     def self.api_response(path, search_params)
         key = Rails.configuration.api['key']
         url = Rails.configuration.api['url']
-        resp = HTTP.headers(accept: "application/json").auth(key).get(url + path, params: search_params)
+        content_type = Rails.configuration.api['content_type']
+        resp = HTTP.headers(accept: content_type).auth(key).get(url + path, params: search_params)
         
         unless resp.status.success?
             raise APIRequestError if resp.status.code.between?(400, 499)
