@@ -6,48 +6,11 @@ class TicketsControllerTest < ActionDispatch::IntegrationTest
   
   
   def setup
-    
-    @json_data = 
-    {
-      'ticket' => 
-      {
-        'id' => 1,
-        'subject' => "Subject name",
-        'description' => "Hello this is a description",
-        'created_at' => "2012-04-04T09:14:57Z",
-        'requester_id' => 1234,
-        'status' => "open"
-      }
-    }
-    
-    @data_array = 
-    {
-      'tickets' => 
-      [
-        {
-          'id' => 1,
-          'subject' => "Subject name",
-          'description' => "Hello this is a description",
-          'created_at' => "2012-04-04T09:14:57Z",
-          'requester_id' => 1234,
-          'status' => "open"
-        },
-        {
-          'id' => 2,
-          'subject' => "Subject name",
-          'description' => "Hello this is a description",
-          'created_at' => "2012-04-04T09:14:57Z",
-          'requester_id' => 1234,
-          'status' => "open"
-        }
-      ]
-    }
-    
-    @tickets = Ticket.array(@data_array['tickets'])
-    @ticket = Ticket.new(@json_data['ticket'])
+    @tickets = Ticket.array(api_tickets_hash['tickets'])
+    @ticket = Ticket.new(api_ticket_hash['ticket'])
   end
   
-  def mock_json_data(data)
+  def mock_zendesk_hash(data)
     Zendesk.stub :json_data, data do
       yield
     end
@@ -55,34 +18,58 @@ class TicketsControllerTest < ActionDispatch::IntegrationTest
   
   
   test "should get index" do
-    
-    mock_json_data @data_array do
+    mock_zendesk_hash api_tickets_hash do
       get tickets_url
       assert_response :success
     end
   end
 
-  test "should show ticket" do
-    mock_json_data @json_data do
+  test "should get show" do
+    mock_zendesk_hash api_ticket_hash do
       get ticket_url @ticket.id
       assert_response :success
     end
   end
-
-
-  test "should show page" do
-    mock_json_data @data_array do
+  
+  test "should get index for 0 tickets" do
+    mock_zendesk_hash api_tickets_hash(amount = 0) do 
+      get tickets_url
+      assert_response :success
+    end
+  end
+  
+  test "should get page" do
+    mock_zendesk_hash api_tickets_hash do
       get tickets_url page = 10
-      assert_equal 10, @controller.params[:format].to_i
-    end
-  end
-
-  test "should show existing ticket" do
-    mock_json_data @json_data do 
-      get ticket_url @ticket.id
+      page_param = @controller.params[:format].to_i
+      assert_equal 10, page_param
       assert_response :success
     end
   end
+  
+  
+  
+  
+  
+  
+  
+  
+  test "should display correct amount of tickets" do
+    mock_zendesk_hash api_tickets_hash(amount = 20) do 
+      get tickets_url
+      assert_equal 20, assigns(:tickets).count
+    end
+  end
+  
+  test "should display 0 tickets" do
+    mock_zendesk_hash api_tickets_hash(amount = 0) do 
+      get tickets_url
+      assert_equal 0, assigns(:tickets).count
+    end
+  end
+  
+  
+  # can't make pagination assertions since pagination logic comes from the API
   
   
 end

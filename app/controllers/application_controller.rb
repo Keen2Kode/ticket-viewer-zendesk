@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     include ApplicationHelper
     
     # generally a bad idea, but this is how I interpreted the requirement
-    # Tells the user something is wrong if there is a program error.
+    # "Tells the user something is wrong if there is a program error."
     rescue_from StandardError, with: :program_error_render
     rescue_from Zendesk::APIError, with: :api_error_render
     

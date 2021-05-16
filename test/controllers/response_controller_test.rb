@@ -13,12 +13,12 @@ class ResponseControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "GET API request has correct show id" do
+  test "API request gets the correct show id" do
     get response_url(ApplicationController::API)
     assert_equal API, @controller.params[:id]
   end
   
-  test "GET General request has correct show id" do
+  test "General request gets the correct show id" do
     get response_url(ApplicationController::GENERAL)
     assert_equal GENERAL, @controller.params[:id]
   end
@@ -28,7 +28,7 @@ class ResponseControllerTest < ActionDispatch::IntegrationTest
   
   
   
-  test "Bad response GETs the API show page" do
+  test "Bad API response gets the API show page" do
     raises_exception = -> (a,b){ raise Zendesk::APIError.new } 
     
     mock_api_response raises_exception do
@@ -37,7 +37,7 @@ class ResponseControllerTest < ActionDispatch::IntegrationTest
     end
   end
   
-  test "General response GETs the General show page" do
+  test "Program error gets the General show page" do
     # this is how I interpreted the requirement: 
     # "Tells the user something is wrong if there is a program error"
     raises_exception = -> (a,b){ raise StandardError.new } 
