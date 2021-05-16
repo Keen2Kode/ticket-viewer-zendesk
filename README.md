@@ -2,11 +2,11 @@
 
 The intern coding challenge provided by Zendesk. Basic Requirements:
 
-* Connect to the Zendesk API
-* Request all the tickets for your account
-* Display them in a list
-* Display individual ticket details
-* Page through tickets when more than 25 are returned
+* Connect to the Zendesk API: *(app/models/zendesk)*
+* Request all the tickets for your account: *(app/controllers/tickets_controller)*
+* Display them in a list: *(app/views/tickets/index)*
+* Display individual ticket details: *(app/views/tickets/show)*
+* Page through tickets when more than 25 are returned: *(app/controllers/tickets_controller)*
 
 ## Framework used 
 
@@ -40,6 +40,8 @@ rails s
 
 > Tells the user something is wrong if there is a program error.
 * Based on this requirement, I added this `rescue_from StandardError, with: :program_error_render` to the ApplicationController class. This means that most errors will be caught and redirected to a custom template. To see the general errors normally, comment this line out.
+
+* Used 2 gems: [HTTP](https://github.com/httprb/http) and [rails-controller-testing](https://github.com/rails/rails-controller-testing).
 
 
 
