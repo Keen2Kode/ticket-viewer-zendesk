@@ -10,7 +10,6 @@ class Zendesk
         
         resp = api_response(path, search_params)
         
-        puts resp.body
         JSON.parse resp.body
     end
     
