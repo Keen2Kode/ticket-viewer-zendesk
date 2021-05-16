@@ -10,9 +10,9 @@ The intern coding challenge provided by Zendesk. Basic Requirements:
 
 ## Framework used 
 
-Ruby on Rails 5 running on Cloud9 AWS through the Linux/Ubuntu terminal.
+I decided to go with **Ruby on Rails 5** running on Cloud9 AWS through the Linux/Ubuntu terminal.
 
-Due to the volatility of Rails, I also deployed a [version to Heroku](https://shielded-coast-55327.herokuapp.com/) incase the app fails to run directly.
+Due to the volatility of Rails, I also deployed a [version to Heroku](https://shielded-coast-55327.herokuapp.com/) if the configuration fails.
 
 ## Steps for configuration
 
@@ -25,7 +25,18 @@ cd ticket-viewer-zendesk
 bundle install
 rails s
 ```
-## Steps for testing
-```
-rails test
-```
+
+---
+
+### Additional Notes
+
+
+* Currently, I'm doing the RAD course in RMIT which heavily employs Rails in its teaching material. As the coding challenge and the course are done in tandem, I thought this would be a good opportunity to apply the course knowledge I've acquired over the past 2 weeks onto this challenge. Due to the time constraints, using Rails also seemed like a good choice when going for Rapid Development.
+
+* To reduce configuration issues with a database, I created the app with`--skip-ActiveRecord`so there's no database to create.
+
+* Since there's no database, the models Zendesk and Ticket exist to access and manipulate API data.
+
+
+
+
