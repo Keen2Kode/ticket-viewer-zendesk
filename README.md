@@ -39,7 +39,7 @@ rails s
 * Since there's no database, the models Zendesk and Ticket exist to access and manipulate API data.
 
 > Tells the user something is wrong if there is a program error.
-* Based on this requirement, I added this `rescue_from StandardError, with: :program_error_render` to the ApplicationController class. This means that most errors will be caught and redirected to a custom template. To see the general errors normally, uncomment this line.
+* Based on this requirement, I added this `rescue_from StandardError, with: :program_error_render` to the ApplicationController class. This means that most errors will be caught and redirected to a custom template. To see the general errors normally, comment this line out.
 
 
 
