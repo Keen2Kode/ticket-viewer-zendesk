@@ -12,7 +12,7 @@ The intern coding challenge provided by Zendesk. Basic Requirements:
 
 I decided to go with **Ruby on Rails 5** running on Cloud9 AWS through the Linux/Ubuntu terminal.
 
-Due to the volatility of Rails, I also deployed a [version to Heroku](https://shielded-coast-55327.herokuapp.com/) if the configuration fails.
+I also deployed a [version to Heroku](https://shielded-coast-55327.herokuapp.com/) just in case the configuration fails.
 
 ## Steps for configuration
 
