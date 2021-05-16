@@ -1,16 +1,27 @@
 class ApplicationController < ActionController::Base
+    API = 'api_request'
+    GENERAL = 'general'
     protect_from_forgery with: :exception
     include ApplicationHelper
-    # # so can be applied to other models eg: Customer, if needed
-    # before_action :set_json_data
+    
+    # generally a bad idea, but this is how I interpreted the requirement
+    # Tells the user something is wrong if there is a program error.
+    rescue_from StandardError, with: :program_error_render
+    rescue_from Zendesk::APIError, with: :api_error_render
     
     
-    # def set_json_data
-    #     begin
-    #         # using ApplicationHelper to handle requests -> json
-    #         @json_data = json_data
-    #     rescue StandardError => e
-    #         redirect_to response_index_path, notice: e.message
-    #     end
-    # end
+    def data(**search_params)
+        Zendesk.json_data(request.path, search_params)
+    end
+    
+    def api_error_render(error)
+        redirect_to response_path(API), notice: error.message
+    end
+    
+    def program_error_render(error)
+        redirect_to response_path(GENERAL), notice: error.message
+    end
+    
+    
+    
 end

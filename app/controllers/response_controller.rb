@@ -1,6 +1,6 @@
 class ResponseController < ApplicationController
-  skip_before_action :set_json_data
   
-  def index
+  def show
+    @response_type = params[:id]
   end
 end
