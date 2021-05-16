@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ResponseControllerTest < ActionDispatch::IntegrationTest
   
-  # to ensure application controller can't change it to something else
+  # to ensure the application controller can't change it to something else
   API = 'api_request'
   GENERAL = 'general'
   
@@ -16,11 +16,13 @@ class ResponseControllerTest < ActionDispatch::IntegrationTest
   test "API request gets the correct show id" do
     get response_url(ApplicationController::API)
     assert_equal API, @controller.params[:id]
+    assert_response :success
   end
   
   test "General request gets the correct show id" do
     get response_url(ApplicationController::GENERAL)
     assert_equal GENERAL, @controller.params[:id]
+    assert_response :success
   end
   
   

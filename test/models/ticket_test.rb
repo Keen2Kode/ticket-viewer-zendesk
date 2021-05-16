@@ -57,7 +57,8 @@ class TicketTest < ActiveSupport::TestCase
   end  
   
   test "Tickets array handles empty array" do
-    tickets = Ticket.array([])
+    tickets_hash = api_tickets_hash(amt = 0)['tickets']
+    tickets = Ticket.array(tickets_hash)
     assert_equal tickets.size, 0
   end
   

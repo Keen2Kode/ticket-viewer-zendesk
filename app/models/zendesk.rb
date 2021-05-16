@@ -9,6 +9,7 @@ class Zendesk
     def self.json_data(path, search_params)
         
         resp = api_response(path, search_params)
+        
         JSON.parse resp.body
     end
     
